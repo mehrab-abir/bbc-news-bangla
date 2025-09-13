@@ -5,24 +5,84 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BBC News Bangla</title>
 
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <header id="header" class="bg-red-600 py-6">
-        <div class="logo w-[90%] mx-auto">
+    <header id="header" class="mx-auto bg-red-600 py-6 flex justify-around">
+        <div class="logo">
             <img src="assets/logo.svg" alt="" class="invert">
+        </div>
+
+        <div id="mobileMenuSwitch" class="flex flex-col items-center justify-center cursor-pointer md:hidden">
+            <span class="w-[30px] h-[4px] bg-white"></span>
+            <span class="w-[30px] h-[4px] mt-1 bg-white"></span>
+            <span class="w-[30px] h-[4px] mt-1 bg-white"></span>
         </div>
     </header>
 
     <nav class="border-b border-gray-500 hidden md:block">
         <div id="categories-container" class="w-[90%] mx-auto flex items-center gap-5 list-none ">
-            <!-- <li class="cursor-pointer text-lg mr-2 hover:border-b-4 hover:border-red-600">Home</li> -->
+            <!-- <li class="cursor-pointer text-lg mr-2 hover:border-b-4 hover:border-red-600 list-item">Home</li> -->
         </div>
     </nav>
-   
+
+
+    <!-- Menu for mobile device -->
+    <nav class="border-b border-gray-500 w-screen h-content bg-white absolute top-0 left-0 -translate-x-full transition-all duration-300" id="mobileMenu">
+        <div id="menuCloseBtn" class="text-center">
+            <span class="text-6xl cursor-pointer">&times;</span>
+        </div>
+        <div id="categories-container-mobile" class="flex flex-col list-none text-black mt-6">
+            <!-- <li class="cursor-pointer text-lg mr-2 hover:border-b-4 hover:border-red-600 list-item">Home</li> -->
+             <li id="bookmarkBtnMobile" class="mt-3 text-lg border-b border-gray-500 py-3 pl-2"><a href="#bookmarks" class="font-bold">Bookmark</a></li>
+        </div>
+    </nav>
+
+    <main id="main-section" class="mt-6">
+        <div id="news" class="w-[90%] mx-auto grid grid-cols-1 md:grid-cols-4 gap-6">
+            <div id="newsContainer" class="col-span-3 grid grid-cols-1 md:grid-cols-3 gap-4">
+                <!-- news card here  -->
+
+                <!-- for no articles categories  -->
+                
+            </div>
+
+            <div id="bookmark-container" class="col-span-1 ml-9 md:ml-0 border border-gray-500 overflow-hidden items-center justify-center">
+                <div class="bookMarkHeader bg-red-600 text-white p-3 flex items-center justify-between">
+                    <h1 class="text-lg font-semibold">Bookmark</h1>
+                    <span class="bookmarkCounter">0</span>
+                </div>
+
+                <div id="bookmarks">
+                    <!-- bookmark goes here -->
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Open the modal using ID.showModal() method -->
+    <!-- <button class="btn" onclick="my_modal_1.showModal()">open modal</button> -->
+    <dialog id="detailsModal" class="modal">
+        <div class="modal-box">
+            
+        </div>
+    </dialog>
+
+    <div class="w-fit mx-auto mt-4">
+        <button class="btn btn-neutral text-center">
+            <a href="#header">Go Back to Top</a>
+        </button>
+    </div>
+    
+
+    <footer id="footer" class="mt-9 py-5 flex flex-col items-center justify-center bg-red-400">
+        <p class="text-white">&copy; Copyright __ <a href="https://www.linkedin.com/in/mehrababir/" target="_blank" class="font-bold no-underline cursor-pointer">Mehrab Jalil Abir [Linkedin]</a></p>
+    </footer>
+    
     <script src="index.js"></script>
 </body>
 </html>
