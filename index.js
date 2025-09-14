@@ -30,14 +30,11 @@ const displayCategories = (categories)=>{
     categories.forEach(category => {
         categoriesContainer.innerHTML += `
             <li id="${category.id}" class="cursor-pointer text-lg mr-2 hover:border-b-4 hover:border-red-600 list-item">${category.title}</li> `
-
-        // console.log(category.id)
     });
 
 
     //active category
     const listItems = document.querySelectorAll('.list-item');
-    // console.log(listItems)
 
     listItems.forEach(item =>{
         
@@ -80,20 +77,24 @@ bookmarkBtnMobile.addEventListener('click',function(){
 })
 
 const categoriesContainerMobile = document.getElementById("categories-container-mobile");
+
 const displayCategoriesMobile = (categories) =>{
     categories.forEach(category => {
         categoriesContainerMobile.innerHTML += `
             <li id="${category.id}" class="mt-3 text-lg border-b border-gray-500 py-3 pl-2 mobile-list-item"><a href="#">${category.title}</a></li>`
-
-        // console.log(category.id)
     });
 
     const mobileListItems = document.querySelectorAll('.mobile-list-item');
-    // console.log(listItems)
 
     mobileListItems.forEach(item =>{
         item.addEventListener('click',(event)=>{
             event.preventDefault();
+
+            mobileListItems.forEach(li => li.classList.remove('active'))
+
+            const activeCategory = event.target;
+            activeCategory.classList.add('active');
+
             loadCategoryData(event.currentTarget.id) //after clicking on a news category
 
             mobileMenu.classList.add('-translate-x-full');
@@ -104,7 +105,6 @@ const displayCategoriesMobile = (categories) =>{
 loadCategoryData('main'); //news of main page will be loaded and displayed by default, right after the script runs
 
 function loadCategoryData(id){
-    // console.log(id)
     fetch(`https://news-api-fs.vercel.app/api/categories/${id}`)
     .then(res => {
         return res.json()
@@ -122,7 +122,6 @@ function loadCategoryData(id){
 }
 
 function displayCategoryData(articles){
-    // console.log(articles)
 
     if(articles.length == 0){
         newsContainer.innerHTML = `
@@ -173,15 +172,11 @@ function handleBookmark(event){
 
     const newsTitle = event.target.parentNode.parentNode.children[1].innerText;
     const newsId = event.target.id;
-    // console.log(newsTitle)
-    // console.log(newsId)
-
 
     const bookmark = {
         title : newsTitle,
         id : newsId
     }
-            
             
     let exist = bookmarks.find(bookmark => bookmark.id === newsId);
 
@@ -192,15 +187,12 @@ function handleBookmark(event){
         alert("This news already added to bookmark");
     }
 
-    // console.log(bookmarks)
-
     showBookMarks(bookmarks);
 
 }
 
 const showBookMarks = (bookmarks)=>{
     bookmarkContainer.innerHTML = '';
-
 
     bookmarks.forEach(bookmark => {
         const newBookmark = document.createElement('div');
@@ -211,7 +203,6 @@ const showBookMarks = (bookmarks)=>{
                 <button class="btn mt-2" id="${bookmark.id}">Delete</button>
             </div>
         `
-        // console.log(bookmark.title)
         bookmarkContainer.appendChild(newBookmark)
     })
 
@@ -233,7 +224,6 @@ const newsDetails =(event)=>{
 }
 
 const showNewsDetails = (articles)=>{
-    console.log(articles)
     detailsModal.showModal();
 
     modalBox.innerHTML = `
@@ -257,9 +247,7 @@ bookmarkContainer.addEventListener('click',function(event){
     }
 })
 
-const deleteBookmark = (event)=>{
-    // console.log(event.target.id)
-    
+const deleteBookmark = (event)=>{ 
     const updatedBookmarks = bookmarks.filter(bookmark => bookmark.id !== event.target.id);
     bookmarks = updatedBookmarks;
     showBookMarks(bookmarks);
