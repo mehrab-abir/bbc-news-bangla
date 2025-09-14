@@ -144,8 +144,8 @@ function displayCategoryData(articles){
                 <h1 class="text-lg font-bold mt-2">${article.title}</h1>
                 <p class="text-sm mt-1">${article.time}</p>
                 <div class="btns mt-3">
-                    <button class="btn btn-default" id="${article.id}">Bookmark</button>
-                    <button class="btn btn-default" id="${article.id}">View Details</button>
+                    <button class="btn btn-default mt-2" id="${article.id}">Bookmark</button>
+                    <button class="btn btn-default mt-2" id="${article.id}">View Details</button>
                 </div>
             </div>
         `
