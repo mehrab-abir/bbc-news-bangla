@@ -90,11 +90,6 @@ const displayCategoriesMobile = (categories) =>{
         item.addEventListener('click',(event)=>{
             event.preventDefault();
 
-            mobileListItems.forEach(li => li.classList.remove('active'))
-
-            const activeCategory = event.target;
-            activeCategory.classList.add('active');
-
             loadCategoryData(event.currentTarget.id) //after clicking on a news category
 
             mobileMenu.classList.add('-translate-x-full');
