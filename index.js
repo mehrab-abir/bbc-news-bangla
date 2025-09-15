@@ -1,3 +1,15 @@
+//manage loading
+const manageLoading = (status) =>{
+    if(status){
+        document.querySelector('.loading').classList.remove('hidden');
+        document.getElementById('main-section').classList.add('hidden');
+    }
+    else{
+        document.querySelector('.loading').classList.add('hidden');
+        document.getElementById('main-section').classList.remove('hidden');
+    }
+}
+
 const categoriesContainer = document.getElementById("categories-container");
 const newsContainer = document.getElementById("newsContainer");
 
@@ -100,12 +112,15 @@ const displayCategoriesMobile = (categories) =>{
 loadCategoryData('main'); //news of main page will be loaded and displayed by default, right after the script runs
 
 function loadCategoryData(id){
+    manageLoading(true);
+
     fetch(`https://news-api-fs.vercel.app/api/categories/${id}`)
     .then(res => {
         return res.json()
     })
     .then(data => displayCategoryData(data.articles))
     .catch(err => {
+        manageLoading(false)
         newsContainer.innerHTML = `
                 <div class="col-span-3 px-6 py-16 border border-gray-500 text-center mt-16">
                     <h1 class="text-xl text-red-600">Something went wrong!!</h1>
@@ -119,6 +134,7 @@ function loadCategoryData(id){
 function displayCategoryData(articles){
 
     if(articles.length == 0){
+        manageLoading(false);
         newsContainer.innerHTML = `
             <div class="col-span-3 px-6 py-16 border border-gray-500 text-center mt-16">
                 <h1 class="text-xl text-red-600">No News available in this category right now</h1>
@@ -145,6 +161,8 @@ function displayCategoryData(articles){
             </div>
         `
     })
+    
+    manageLoading(false);
 }
 
 //adding bookmark
@@ -247,6 +265,9 @@ const deleteBookmark = (event)=>{
     bookmarks = updatedBookmarks;
     showBookMarks(bookmarks);
 }
+
+
+
 
 
 
